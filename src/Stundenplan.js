@@ -33,7 +33,7 @@ class Stundenplan extends Component {
 
   handleClear = (hour, day) => {
     var feacher = this.state.feacher
-    feacher[hour].splice(day, 0, "");
+    feacher[hour].splice(day, 1, "");
     this.setState({feacher: feacher})
   };
 

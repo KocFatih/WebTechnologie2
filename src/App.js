@@ -1,57 +1,64 @@
 import React, { Component } from 'react';
-import './App.css';
-import Table from "./components/table";
-import FachSelect from './fachselect';
+//import './App.css';
+//import Table from "./components/table";
+//import FachSelect from './fachselect';
+import { BrowserRouter as Router, Route, Link} from "react-router-dom";
+import {Lernreaume} from './Lernreaume';
+import {ProfBereich} from './ProfBereich';
+import {Ausfall} from './Ausfall';
+import {YourLevel} from './YourLevel';
+import Stundenplan from './Stundenplan';
 
 
-class App extends Component {
-  state = {
-    feacher: [
+function FirstButton() {
+  return <Stundenplan />;
+}
+function SecondButton() {
+  return /*<Lernreaume />*/;
+}
+function ThirdButton() {
+  return /*<ProfBereich />*/;
+}
+function ForthButton() {
+  return /*<Ausfall />*/;
+}
+function FifthButton() {
+  return /*<YourLevel />*/;
+}
 
 
-     ["Stunde", "Zeit", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"],
-     ["1", "Keine", "Ahnung", "", "Informatik", "ITS"],
-     ["2", "Ahnung", "Keine", "", "", "ITS"],
-     ["3", "ITS", "ITS", "Informatik", "Informatik", "ITS"],
-     ["4", "ITS", "ITS", "Informatik", "Informatik", "ITS"],
-     ["5", "Test", "Test", "Test", "Test", "Test", "Test"],
-     ["6", "Test", "Test", "Test", "Test", "Test", "Test"],
-     ["7", "Test", "Test", "Test", "Test", "Test", "Test"],
-     ["8", "Test", "Test", "Test", "Test", "Test", "Test"],
-     ["9", "Test", "Test", "Test", "Test", "Test", "Test"],
-     ["10", "Test", "Test", "Test", "Test", "Test", "Test"],
-     ["11", "Test", "Test", "Test", "Test", "Test", "Test"],
-     ["12", "Test", "Test", "Test", "Test", "Test", "Test"]
-    ]
-  };
+function App() {
+  return (
+      <Router>
+      <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/Stundenplan/"><button>Stundenplan</button></Link>
+            </li>
+            <li>
+              <Link to="/Lernreaume/"><button>Lernräume</button></Link>
+            </li>
+            <li>
+              <Link to="/ProfBereich/"><button>Prof Bereich</button></Link>
+            </li>
+            <li>
+              <Link to="/Ausfall/"><button>Ausfall</button></Link>
+            </li>
+            <li>
+              <Link to="/YourLevel/"><button>YourLevel</button></Link>
+            </li>
+          </ul>
+        </nav>
 
-  handleInsert = (hour, day, modul) => {
-    var feacher = this.state.feacher
-    feacher[hour].splice(day, 1, modul);
-    this.setState({feacher: feacher})
-  };
-
-  handleClear = (hour, day) => {
-    var feacher = this.state.feacher
-    feacher[hour].splice(day, 0, "");
-    this.setState({feacher: feacher})
-  };
-
-  render(){
-
-    //console.log(this.state.feacher[hour+1][day+2]);
-    return (
-      <React.Fragment>
-        <Table 
-          feacher={this.state.feacher}
-        />
-        <FachSelect 
-          onInsert= {this.handleInsert}
-          onClear = {this.handleClear}
-        />
-      </React.Fragment>
-    );
-  }
+        <Route path="/Stundenplan/" component={FirstButton} />
+        <Route path="/Lernreaume/" component={SecondButton} />
+        <Route path="/ProfBereich/" component={ThirdButton} />
+        <Route path="/Ausfall/" component={ForthButton} />
+        <Route path="/YourLevel/" component={FifthButton} />
+      </div>
+    </Router>
+  );
 }
 
 export default App;
