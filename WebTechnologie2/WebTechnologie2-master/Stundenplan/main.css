@@ -1,0 +1,27 @@
+ #fullTable {
+ border-collapse: collapse;
+ table-layout: fixed;
+ /*background-image: url(blabla.jpg);*/
+ background-repeat: no-repeat;
+ background-position: center;
+ background-size: 100%; 
+}
+
+* {
+margin: 0;
+padding: 0;
+}
+
+.time {
+font-size: 11px; 
+font-family: Verdana;
+border: 1px;
+/*border-left: 3 solid OrangeRed;
+border-right: 3 solid OrangeRed;*/
+font-size: 70%;
+width: 100%;
+font-weight: NULL;
+text-align: center;
+background-color: transparent;
+border-color: #315172;
+}

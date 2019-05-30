@@ -1,0 +1,270 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+
+    <!--Meta-->
+    <title>Stundenplan</title>
+    <meta charset="utf-8">
+
+    <!--CSS-->
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="Stundenplan.css">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900,400italic' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	
+	<!--JS-->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	
+    <!--PHP-->
+    <script type="text/php" src="request.php">
+    </script>
+
+    <!--React+Babel-->
+    <script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+<body bgcolor="#FF530D">
+
+    <script type="text/babel">
+
+        function ComponentTablehead(props) {
+
+        return (
+
+        <tr id="headerRow">
+            {props.tableHeader.map((head) => (
+            <th>{head}</th>
+            ))}
+        </tr>
+
+        )
+
+        }
+
+
+        class ComponentTable extends React.Component {
+        constructor(props){
+        super(props)
+
+        this.state = {
+        tableHead: ["Stunde", "Zeit", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"],
+        firstRow: ["1", "Keine", "Ahnung", "", "Informatik", "ITS"],
+        secondRow: ["2", "Ahnung", "Keine", "", "", "ITS"],
+        thirdRow: ["3", "ITS", "ITS", "Informatik", "Informatik", "ITS"],
+        forthRow: ["4", "ITS", "ITS", "Informatik", "Informatik", "ITS"],
+        fifthRow: ["5", "Test", "Test", "Test", "Test", "Test", "Test"],
+        sixthRow: ["6", "Test", "Test", "Test", "Test", "Test", "Test"],
+        seventhRow: ["7", "Test", "Test", "Test", "Test", "Test", "Test"],
+        eighthRow: ["8", "Test", "Test", "Test", "Test", "Test", "Test"],
+        ninthRow: ["9", "Test", "Test", "Test", "Test", "Test", "Test"],
+        tenthRow: ["10", "Test", "Test", "Test", "Test", "Test", "Test"],
+        eleventhRow: ["11", "Test", "Test", "Test", "Test", "Test", "Test"],
+        twelfthRow: ["12", "Test", "Test", "Test", "Test", "Test", "Test"],
+        }
+        }
+        render(){
+        return(
+        <tbody id="fullTable">
+            <ComponentTablehead tableHeader={this.state.tableHead} />
+            <ComponentTableRow tableRow={this.state.firstRow} />
+            <ComponentTableRow tableRow={this.state.secondRow} />
+            <ComponentTableRow tableRow={this.state.thirdRow} />
+            <ComponentTableRow tableRow={this.state.forthRow} />
+            <ComponentTableRow tableRow={this.state.fifthRow} />
+            <ComponentTableRow tableRow={this.state.sixthRow} />
+            <ComponentTableRow tableRow={this.state.seventhRow} />
+            <ComponentTableRow tableRow={this.state.eighthRow} />
+            <ComponentTableRow tableRow={this.state.ninthRow} />
+            <ComponentTableRow tableRow={this.state.tenthRow} />
+            <ComponentTableRow tableRow={this.state.eleventhRow} />
+            <ComponentTableRow tableRow={this.state.twelfthRow} />
+        </tbody>
+        )
+        }
+
+        }
+
+        function ComponentTableRow(props) {
+
+        return (
+
+        <tr>
+            <td>{props.tableRow[0]}</td>
+            <td></td>
+            <td>{props.tableRow[1]}</td>
+            <td>{props.tableRow[2]}</td>
+            <td>{props.tableRow[3]}</td>
+            <td>{props.tableRow[4]}</td>
+            <td>{props.tableRow[5]}</td>
+        </tr>
+        )
+        }
+
+
+
+
+        ReactDOM.render(
+
+        <ComponentTable />,
+        document.getElementById('sendHere')
+        )
+
+
+    </script>
+    <div class="1" id="sendHere"></div>
+	
+	<div class="progress">
+	  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">Level 3</div>
+	</div>
+    
+	<select name="Fachrichtung" id="Fachrichtung" onchange="request.php" method="post">
+        <option value="none">None</option>
+        <option value="informatik">Informatik</option>
+        <option value="elektrotechnik">Elektrotechnik</option>
+        <option value="maschinenbau">Maschinenbau</option>
+        <option value="wirtschaftsinformatik">Wirtschaftsinformatik</option>
+    </select>
+
+    <div id="Planner">
+        <form name="nextChange" action="#" method="GET">
+            <label for="formGroupExampleInput">Wochentag:</label>
+            <select id="nextDay" class="form-control">
+                <option>Montag</option>
+                <option>Dienstag</option>
+                <option>Mittwoch</option>
+                <option>Donnerstag</option>
+                <option>Freitag</option>
+            </select>
+            <label for="formGroupExampleInput">Stunde:</label>
+            <select id="nextHour" class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
+                <option>9</option>
+                <option>10</option>
+                <option>11</option>
+                <option>12</option>
+            </select>
+            <label for="formGroupExampleInput">Modul/ Fach:</label>
+            <input id="nextMod" type="text" class="form-control" placeholder="Welches Fach möchtest du hinzufügen/ löschen">
+            <br />
+            <button type="button" class="btn btn-primary" onclick="changePlan()">Add</button>
+            <button type="button" class="btn btn-danger">Clear</button>
+        </form>
+    </div>
+    <script>
+
+        function changePlan() {
+
+            var day = document.getElementById["nextDay"];
+            var hour = document.getElementById["nextHour"];
+            var mod = document.getElementById["nextMod"];
+
+            if (day == "Montag")
+                day = 2;
+            if (day == "Dienstag")
+                day = 3;
+            if (day == "Mittwoch")
+                day = 4;
+            if (day == "Donnerstag")
+                day = 5;
+            if (day == "Freitag")
+                day = 6;
+
+            switch (hour) {
+
+                case 1:
+
+                    firstRow[day] = mod;
+                    break;
+
+                case 2:
+
+                    secondRow[day] = mod;
+                    break;
+
+                case 3:
+
+                    thirdRow[day] = mod;
+                    break;
+
+                case 4:
+
+                    forthRow[day] = mod;
+                    break;
+
+                case 5:
+
+                    fifthRow[day] = mod;
+                    break;
+
+                case 6:
+
+                    sixthRow[day] = mod;
+                    break;
+
+                case 7:
+
+                    seventhRow[day] = mod;
+                    break;
+
+                case 8:
+
+                    eighthRow[day] = mod;
+                    break;
+
+                case 9:
+
+                    ninthRow[day] = mod;
+                    break;
+
+                case 10:
+
+                    tenthRow[day] = mod;
+                    break;
+
+                case 11:
+
+                    eleventhRow[day] = mod;
+                    break;
+
+                case 12:
+
+                    twelfthRow[day] = mod;
+                    break;
+            }
+
+            handleRemoveMod();
+
+        }
+
+        handleRemoveMod(){
+            this.setState((currentState) => {
+                return{
+                    firstRow: currentState.firstRow.filter((firstRow) => firstRow !== tableRow),
+                    secondRow: currentState.secondRow.filter((secondRow) => secondRow !== tableRow),
+                    thirdRow: currentState.thirdRow.filter((thirdRow) => thirdRow !== tableRow),
+                    forthRow: currentState.forthRow.filter((forthRow) => forthRow !== tableRow),
+                    fifthRow: currentState.fifthRow.filter((fifthRow) => fifthRow !== tableRow),
+                    sixthRow: currentState.sixthRow.filter((sixthRow) => sixthRow !== tableRow),
+                    seventhRow: currentState.seventhRow.filter((seventhRow) => seventhRow !== tableRow),
+                    eighthRow: currentState.eighthRow.filter((eighthRow) => eighthRow !== tableRow),
+                    ninthRow: currentState.ninthRow.filter((ninthRow) => ninthRow !== tableRow),
+                    tenthRow: currentState.tenthRow.filter((tenthRow) => tenthRow !== tableRow),
+                    eleventhRow: currentState.eleventhRow.filter((eleventhRow) => eleventhRow !== tableRow),
+                    twelfthRow: currentState.twelfthRow.filter((twelfthRow) => twelfthRow !== tableRow),
+                }
+            })
+        }
+    </script>
+</body>
+</html>
