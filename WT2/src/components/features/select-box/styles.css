@@ -13,7 +13,8 @@
 .select-box--box {
   width: 180px;
   position: absolute;
-  left: 0;
+  left: 2em;
+  background-color: white;
 }
 
 .select-box--arrow {
@@ -37,12 +38,13 @@
 }
 
 .select-box--items {
+  background-color: white;
 }
 
 .select-box--items div {
-  border-bottom: 1px solid #ddd;
+  /*border-bottom: 1px solid #ddd;
   border-left: 1px solid #ddd;
-  border-right: 1px solid #ddd;
+  border-right: 1px solid #ddd;*/
   padding: 6px;
   padding-left: 20px;
 }

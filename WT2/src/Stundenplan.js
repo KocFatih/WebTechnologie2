@@ -5,6 +5,7 @@ import FachSelect from './fachselect';
 import SelectBox from "./components/features/select-box/index";
 import "bootstrap/dist/css/bootstrap.css";
 import {Button, Dropdown} from "react-bootstrap";
+import Navigation from './components/features/Navigation/Navigation';
 
 
 class Stundenplan extends Component {
@@ -96,7 +97,15 @@ class Stundenplan extends Component {
       [{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'}],//donnerstag
       [{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'},{id: '-'}] //freitag
     ],
+
+    //Benutzer-Profil des Nutzers
+    Benutzer: {name: "-", lvl: ["-","-"], bild: "-"}, //lvl: index0=level index1=prozent
+
+    //login daten
+    Login: {email: "-", password: "-"},
   };
+
+  
 
   //anpassen des Persönlichen Profiles
   handleProfile = (day, hour, id) => {          //day=0-4 hour=0-11
@@ -106,7 +115,7 @@ class Stundenplan extends Component {
 
   handleSafeChanges = () => {
     console.log("gespeichert")
-    //Änderungen werden im DB abgelegt
+    //Änderungen werden im DB abgelegt, per login daten
     //  Profile->DB
   }
 
@@ -118,7 +127,18 @@ class Stundenplan extends Component {
     //this.setState({mittwoch: ????})
     //this.setState({donnerstag: ????})
     //this.setState({freitag: ????})
+  }
 
+
+  handleLogin = (email, password) => {
+    console.log("login versuch");  //email oder password falsch oder nicht vorhanden handeling
+    console.log(email);
+    console.log(password);
+    //Login->DB
+
+    this.state.Benutzer = {name: "Peter", lvl: ["5","30"], bild: "xxxx"}
+    var account = -1; //-1 falsches Password. 0=null. 1 für korrektes Account
+    this.refs.child.refs.child.tryLogin(account, this.state.Benutzer) // Stundenplan->Navigation->Login
   }
 
   /*
@@ -134,6 +154,8 @@ class Stundenplan extends Component {
     this.setState({feacher: feacher})
   };
   */
+
+
   render(){
 
     //this.handleProfile(0,0,2);
@@ -142,6 +164,17 @@ class Stundenplan extends Component {
 
     return (
       <React.Fragment>
+        <Navigation           
+          onChange={(e) => this.props.handleDefaultPlan(e.target.value)}
+          handleDefaultPlan = {this.handleDefaultPlan}
+          style ={{position: "absolute", left: "10em"}}
+          name ="venue[country_id]"
+          items = {this.state.feacher}
+          handleSafeChanges = {this.handleSafeChanges}
+          handleLogin = {this.handleLogin}
+          ref="child"
+        />
+        {/*<button onClick={this.onClick.bind(this)}>Click</button>*/}
         <Table 
           montag={this.state.montag}
           dienstag={this.state.dienstag}
@@ -155,14 +188,14 @@ class Stundenplan extends Component {
           onClear = {this.handleClear}
         />*/}
         <div>
-      <SelectBox  //innerhalb dessen funktion muss eine allgemeine request des fachs gemacht werden.
+          
+      {/*<SelectBox  //innerhalb dessen funktion muss eine allgemeine request des fachs gemacht werden.
           onChange={(e) => this.props.handleDefaultPlan(e.target.value)}
           handleDefaultPlan = {this.handleDefaultPlan}
           style ={{position: "absolute", left: "10em"}}
           name ="venue[country_id]"
           items = {this.state.feacher}
-      />
-      <Button className="btn btn-primary btn-sm m-2" style={{position: "absolute", left: "20em"}} onClick={this.handleSafeChanges}>Save Changes</Button>
+      />*/}
       </div>
       </React.Fragment>
     );
